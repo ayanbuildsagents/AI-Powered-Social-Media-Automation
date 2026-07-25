@@ -1,90 +1,223 @@
-ProLogics — AI-Powered Social Media Content Automation
+🤖 AI Social Media Automation
 
-An end-to-end n8n workflow that turns a single row in a Google Sheet into a fully designed, human-approved social media post — generating the image with AI, building the design in Canva, routing it through an email approval loop, and (once wired up) publishing it to LinkedIn, Facebook, and Instagram.
+An n8n automation that generates social media images with AI, sends them for approval, applies feedback, and publishes approved posts to multiple platforms.
 
-Built by me for The Pro Accountants and Tax Consultants LLC, as a social media content-automation system.
+✨ Features
 
-What it does
-Every day, the workflow picks up the next content row marked for processing in a Google Sheet.
-It generates an image from the row's prompt using OpenAI (GPT-Image).
-The image is uploaded into Canva and turned into a 1080×1080 design.
-The design's edit link is emailed to the reviewer via Gmail, who approves it or leaves feedback — right from an inline form in the email.
-If rejected, the feedback is merged back into the original prompt by GPT-4o-mini, a new image is generated, and the loop repeats — up to 4 attempts per post.
-Once approved, the final image is exported from Canva, saved to Google Drive, and the sheet row is marked Done.
-(Built, currently disabled) A second stage watches for the final uploaded image and auto-publishes it — with caption and hashtags — to LinkedIn, Facebook, and Instagram.
+🎨 Generates images using OpenAI
 
-Schedule Trigger (daily)
-        │
-Get Next Row (Processing = "In Progress")
-        │
-Limit → 1 row per run
-        │
-Build sub-workflow input (day, prompt, dates, caption, hashtags)
-        │
-Has prompt? ──No──> (skipped)
-        │ Yes
-Mark row "In Progress"
-        │
-Generate Image (OpenAI GPT-Image) ── attempt 1, uses original prompt
-        │
-Upload asset → Canva → Create 1080x1080 Design
-        │
-Email reviewer (Gmail Send & Wait, custom form: Approve Yes/No + Feedback)
-        │
-   ┌────┴────┐
-  Yes         No
-   │           │
-Export from    Merge feedback into prompt (GPT-4o-mini)
-Canva (jpg)         │
-   │           Under 4 attempts?
-Download →          │        │
-Upload to Drive     Yes       No → Email "manual review needed", stop
-   │                │
-Mark row "Done"   Regenerate image → new Canva design
-                     │
-                 Email reviewer again (loop back to Approve? check)
+🖌️ Creates editable Canva designs
 
-The approval / regeneration loop
-Each rejection increments attempt_count and stores the reviewer's feedback.
-Feedback is merged into the current prompt (not the original) by an LLM step, so each revision keeps everything the reviewer didn't ask to change.
-Attempts 2, 3, and 4 write their prompts back to the sheet in dedicated columns (Updated Prompt 1/2/3) so there's a full audit trail of what was tried.
-If attempt 4 is also rejected, the workflow stops and emails whoever's on review duty instead of looping forever — the row stays untouched until someone resets Processing back to New in the sheet.
-Google Sheet schema (ContentPlan tab)
-Column	Purpose
-Sr No.	Day / post identifier
-Date of Posting / TIME OF POSTING	Scheduled publish slot
-Image Prompt	Original AI image prompt
-Updated Prompt 1/2/3	Auto-filled as feedback is merged in on retries
-Processing	New → In Progress → Done
-Caption / Hashtags	Used at publish time
-Canva_Edit_URL	Link to the final approved design
-Approval_Attempts	How many rounds it took to get approved
-Posted_At	Timestamp once finalized
+📧 Sends designs by email for approval
 
-The sheet is the single source of truth — nothing about a post's state lives only inside n8n.
+🔁 Regenerates images using reviewer feedback
 
-Integrations / credentials required
-Service	Used for
-Google Sheets	Reading the content plan, writing status/prompts/attempts
-Google Drive	Storing the final exported image
-OpenAI (GPT-Image + GPT-4o-mini)	Image generation + feedback-to-prompt merging
-Canva API (OAuth2)	Asset upload, design creation, export
-Gmail (Send & Wait)	Reviewer approval emails with inline form
-LinkedIn / Facebook Graph / Instagram Graph	(Stage 2, currently disabled) auto-publishing
-Setup
-Import the workflow JSON into n8n.
-Connect credentials for Google Sheets, Google Drive, OpenAI, Canva (OAuth2), and Gmail.
-Duplicate/point the ContentPlan Google Sheet to your own copy and update the documentId references.
-Set the reviewer's email address in the Gmail nodes.
-Add rows to the sheet with Processing = New and an Image Prompt — the daily schedule trigger will pick them up.
-To enable auto-publishing, fill in the placeholder IDs (YOUR_FACEBOOK_PAGE_ID, YOUR_INSTAGRAM_BUSINESS_USER_ID, YOUR_GOOGLE_SHEET_ID, target Drive folder) in the disabled nodes, connect the LinkedIn/Facebook/Instagram credentials, and re-enable that branch.
-Current status
-✅ Image generation, Canva design creation, and the email approval/regeneration loop are fully built and active.
-⏸️ Auto-publishing to LinkedIn, Facebook, and Instagram is built but disabled — it still has placeholder IDs and needs credentials wired in before going live.
-Roadmap
-Wire up and enable the publishing stage.
-Replace placeholder IDs with environment-specific config.
-Add retry/error alerting for the Canva export and image-generation steps.
-Tech stack
+📊 Uses Google Sheets as the content calendar
 
-n8n · OpenAI (GPT-Image, GPT-4o-mini) · Canva API · Google Sheets · Google Drive · Gmail · LinkedIn / Meta Graph API
+📁 Saves approved images to Google Drive
+
+🚀 Publishes to LinkedIn, Facebook, and Instagram
+
+✅ Updates post and approval status automatically
+
+🔄 How It Works
+
+Google Sheets
+     ↓
+OpenAI Image Generation
+     ↓
+Canva Editable Design
+     ↓
+Email Approval
+     ↓
+Approved? ── No → Update Prompt → Generate Again
+     ↓ Yes
+Export Image to Google Drive
+     ↓
+Post to Social Media
+     ↓
+Update Google Sheets
+
+🛠️ Tools Used
+
+⚙️ n8n
+
+🤖 OpenAI API
+
+🎨 Canva API
+
+📊 Google Sheets
+
+📧 Gmail
+
+📁 Google Drive
+
+💼 LinkedIn API
+
+📘 Facebook Graph API
+
+📸 Instagram Graph API
+
+📋 Google Sheet Columns
+
+Create a sheet named ContentPlan with these columns:
+
+Column
+
+Purpose
+
+Sr No.
+
+Post number
+
+Date of Posting
+
+Scheduled date
+
+TIME OF POSTING
+
+Scheduled time
+
+Image Prompt
+
+Original AI image prompt
+
+Updated Prompt 1
+
+First revised prompt
+
+Updated Prompt 2
+
+Second revised prompt
+
+Updated Prompt 3
+
+Third revised prompt
+
+Processing
+
+New, In Progress, Done, or Posted
+
+Caption
+
+Social media caption
+
+Hashtags
+
+Post hashtags
+
+Canva_Edit_URL
+
+Canva editing link
+
+Approval_Attempts
+
+Number of attempts
+
+Posted_At
+
+Publishing timestamp
+
+🚀 Setup
+
+📥 Clone this repository.
+
+git clone https://github.com/YOUR_USERNAME/YOUR_REPOSITORY.git
+
+⚙️ Import workflow.json into n8n.
+
+🔐 Connect your own credentials:
+
+OpenAI
+
+Google Sheets
+
+Google Drive
+
+Gmail
+
+Canva
+
+LinkedIn
+
+Facebook and Instagram
+
+📝 Replace all placeholder IDs:
+
+YOUR_GOOGLE_SHEET_ID
+YOUR_GOOGLE_DRIVE_FOLDER_ID
+YOUR_FACEBOOK_PAGE_ID
+YOUR_INSTAGRAM_ACCOUNT_ID
+YOUR_REVIEW_EMAIL
+
+🧪 Add one test row and run the workflow manually before activation.
+
+👍 Approval Process
+
+✅ Approve: The Canva design is exported and prepared for posting.
+
+❌ Reject: Feedback is added to the prompt and a new image is generated.
+
+🔁 Maximum attempts: 4 total images.
+
+🛑 After the final rejected attempt, the workflow sends a manual-review email.
+
+🖼️ File Naming
+
+Final images should follow this format:
+
+Day1.jpg
+Day2.jpg
+Day25.jpg
+
+The workflow uses the day number to find the correct Google Sheets row.
+
+⚠️ Important Checks
+
+🔎 Confirm the workflow selects rows with the correct starting status.
+
+🔗 Make sure all node expressions reference the correct node names.
+
+📁 Use the same Drive folder for approved images and the publishing trigger.
+
+🌐 Instagram requires a publicly accessible image URL.
+
+✅ Mark a post as complete only after all required platforms publish successfully.
+
+🔒 Security
+
+Before publishing the repository:
+
+🚫 Remove spreadsheet, folder, page, account, and email IDs.
+
+🚫 Never upload API keys, tokens, passwords, or OAuth secrets.
+
+🔐 Store credentials inside n8n.
+
+♻️ Rotate any secret accidentally uploaded to GitHub.
+
+📂 Repository Structure
+
+.
+├── README.md
+├── workflow.json
+├── .gitignore
+└── LICENSE
+
+💡 Future Improvements
+
+✍️ Automatic caption and hashtag generation
+
+💬 Slack or Telegram approvals
+
+🎞️ Carousel and video-post support
+
+📈 Post-performance tracking
+
+🔄 Independent retry for failed platforms
+
+🔗 Save published post URLs in Google Sheets
+
+📄 License
+
+Add a LICENSE file before publicly distributing the project. The MIT License is a common choice for open-source automation projects.
