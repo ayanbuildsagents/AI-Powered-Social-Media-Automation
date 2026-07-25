@@ -1,0 +1,3262 @@
+{
+  "name": "FINAL PROLOGICS SM AUTOMATION 1.0",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "4d38846d-9eae-4068-aee3-e544b4758c55",
+      "name": "Limit - Only 1 Row Per Run",
+      "type": "n8n-nodes-base.limit",
+      "typeVersion": 1,
+      "position": [
+        6016,
+        -1680
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "has-prompt",
+              "leftValue": "={{ $json.prompt }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "id": "5b223f0b-e5ca-4458-ad77-b4c11dd13e4a",
+      "name": "IF - Row Has Prompt?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        6384,
+        -1680
+      ]
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "attempt-eq-2",
+                    "leftValue": "={{ $('Set - Merged Prompt1').last().json.attempt_count }}",
+                    "rightValue": 2,
+                    "operator": {
+                      "type": "number",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Updated Prompt 1"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "attempt-eq-3",
+                    "leftValue": "={{ $('Set - Merged Prompt1').last().json.attempt_count }}",
+                    "rightValue": 3,
+                    "operator": {
+                      "type": "number",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Updated Prompt 2"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "attempt-eq-4",
+                    "leftValue": "={{ $('Set - Merged Prompt1').last().json.attempt_count }}",
+                    "rightValue": 4,
+                    "operator": {
+                      "type": "number",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Updated Prompt 3"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra"
+        }
+      },
+      "id": "844251a1-85d3-47eb-9b1e-60fbf60a54c5",
+      "name": "Switch - Which Updated Prompt1",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        6560,
+        -464
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1ZADXBEniFbFnqJ9M6neMV1hXgqdESPtNZIguoxsvgtI",
+          "mode": "list",
+          "cachedResultName": "PROLOGICS_SM_SHEET",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1ZADXBEniFbFnqJ9M6neMV1hXgqdESPtNZIguoxsvgtI/edit"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 618622851,
+          "mode": "list",
+          "cachedResultName": "ContentPlan",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1ZADXBEniFbFnqJ9M6neMV1hXgqdESPtNZIguoxsvgtI/edit#gid=618622851"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "row_number": "={{ $('Set - Merged Prompt1').last().json.row_number }}",
+            "Updated Prompt 1": "={{ $('Set - Merged Prompt1').last().json.merged_prompt }}"
+          },
+          "matchingColumns": [
+            "row_number"
+          ],
+          "schema": [
+            {
+              "id": "Sr No.",
+              "displayName": "Sr No.",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Date of Posting",
+              "displayName": "Date of Posting",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "TIME OF POSTING ",
+              "displayName": "TIME OF POSTING ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Image Prompt",
+              "displayName": "Image Prompt",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Updated Prompt 1",
+              "displayName": "Updated Prompt 1",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Updated Prompt 2",
+              "displayName": "Updated Prompt 2",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Updated Prompt 3",
+              "displayName": "Updated Prompt 3",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Processing",
+              "displayName": "Processing",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Caption",
+              "displayName": "Caption",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Hashtags",
+              "displayName": "Hashtags",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Canva_Edit_URL",
+              "displayName": "Canva_Edit_URL",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Approval_Attempts",
+              "displayName": "Approval_Attempts",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Posted_At",
+              "displayName": "Posted_At",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {
+          "locationDefine": {
+            "values": {}
+          }
+        }
+      },
+      "id": "91d5b61f-4efa-4293-9080-721bb113e8a8",
+      "name": "Sheets - Save Updated Prompt ",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        6800,
+        -576
+      ],
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 3000,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "EOHTW7K1G8cAsSPN",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1ZADXBEniFbFnqJ9M6neMV1hXgqdESPtNZIguoxsvgtI",
+          "mode": "list",
+          "cachedResultName": "PROLOGICS_SM_SHEET",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1ZADXBEniFbFnqJ9M6neMV1hXgqdESPtNZIguoxsvgtI/edit"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 618622851,
+          "mode": "list",
+          "cachedResultName": "ContentPlan",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1ZADXBEniFbFnqJ9M6neMV1hXgqdESPtNZIguoxsvgtI/edit#gid=618622851"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "row_number": "={{ $('Set - Merged Prompt1').last().json.row_number }}",
+            "Updated Prompt 2": "={{ $('Set - Merged Prompt1').last().json.merged_prompt }}"
+          },
+          "matchingColumns": [
+            "row_number"
+          ],
+          "schema": [
+            {
+              "id": "Sr No.",
+              "displayName": "Sr No.",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Date of Posting",
+              "displayName": "Date of Posting",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "TIME OF POSTING ",
+              "displayName": "TIME OF POSTING ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Image Prompt",
+              "displayName": "Image Prompt",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Updated Prompt 1",
+              "displayName": "Updated Prompt 1",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Updated Prompt 2",
+              "displayName": "Updated Prompt 2",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Updated Prompt 3",
+              "displayName": "Updated Prompt 3",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Processing",
+              "displayName": "Processing",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Caption",
+              "displayName": "Caption",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Hashtags",
+              "displayName": "Hashtags",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Canva_Edit_URL",
+              "displayName": "Canva_Edit_URL",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Approval_Attempts",
+              "displayName": "Approval_Attempts",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Posted_At",
+              "displayName": "Posted_At",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {
+          "locationDefine": {
+            "values": {}
+          }
+        }
+      },
+      "id": "509b9407-1ad6-4cb0-b70c-0ee68ba7d2e6",
+      "name": "Sheets - Save Updated Prompt 4",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        6800,
+        -352
+      ],
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 3000,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "EOHTW7K1G8cAsSPN",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1ZADXBEniFbFnqJ9M6neMV1hXgqdESPtNZIguoxsvgtI",
+          "mode": "list",
+          "cachedResultName": "PROLOGICS_SM_SHEET",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1ZADXBEniFbFnqJ9M6neMV1hXgqdESPtNZIguoxsvgtI/edit"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 618622851,
+          "mode": "list",
+          "cachedResultName": "ContentPlan",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1ZADXBEniFbFnqJ9M6neMV1hXgqdESPtNZIguoxsvgtI/edit#gid=618622851"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "row_number": "={{ $('Set - Merged Prompt1').last().json.row_number }}",
+            "Updated Prompt 3": "={{ $('Set - Merged Prompt1').last().json.merged_prompt }}"
+          },
+          "matchingColumns": [
+            "row_number"
+          ],
+          "schema": [
+            {
+              "id": "Sr No.",
+              "displayName": "Sr No.",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Date of Posting",
+              "displayName": "Date of Posting",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "TIME OF POSTING ",
+              "displayName": "TIME OF POSTING ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Image Prompt",
+              "displayName": "Image Prompt",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Updated Prompt 1",
+              "displayName": "Updated Prompt 1",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Updated Prompt 2",
+              "displayName": "Updated Prompt 2",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Updated Prompt 3",
+              "displayName": "Updated Prompt 3",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Processing",
+              "displayName": "Processing",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Caption",
+              "displayName": "Caption",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Hashtags",
+              "displayName": "Hashtags",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Canva_Edit_URL",
+              "displayName": "Canva_Edit_URL",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Approval_Attempts",
+              "displayName": "Approval_Attempts",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Posted_At",
+              "displayName": "Posted_At",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {
+          "locationDefine": {
+            "values": {}
+          }
+        }
+      },
+      "id": "58f5831a-37fb-4ef8-9d8a-d7e221836fac",
+      "name": "Sheets - Save Updated Prompt 5",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        6800,
+        -144
+      ],
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 3000,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "EOHTW7K1G8cAsSPN",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "export-done-check",
+              "leftValue": "={{ $json.job.status }}",
+              "rightValue": "success",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "id": "74621f76-bb90-4d6c-be1e-f7f2da5e11a8",
+      "name": "IF - Export Done1",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        6560,
+        -1120
+      ]
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 10
+            }
+          ]
+        }
+      },
+      "id": "0e43820c-1c52-42dc-bdc9-dd41463ef19e",
+      "name": "Schedule - Daily 8AM1",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        5600,
+        -1680
+      ]
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1ZADXBEniFbFnqJ9M6neMV1hXgqdESPtNZIguoxsvgtI",
+          "mode": "list",
+          "cachedResultName": "PRO SM ",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1ZADXBEniFbFnqJ9M6neMV1hXgqdESPtNZIguoxsvgtI/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 618622851,
+          "mode": "list",
+          "cachedResultName": "ContentPlan",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1ZADXBEniFbFnqJ9M6neMV1hXgqdESPtNZIguoxsvgtI/edit#gid=618622851"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "Processing",
+              "lookupValue": "In Progress"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "86d4d7a4-81e3-49d4-905a-8e2f10269941",
+      "name": "Sheets - Get Next New Row1",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        5824,
+        -1680
+      ],
+      "alwaysOutputData": false,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "sHm4uGoJQ8jIEWsU",
+          "name": "Google Sheets account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "var1",
+              "name": "day",
+              "value": "={{ String($json['Sr No.'] ?? '').trim() }}",
+              "type": "string"
+            },
+            {
+              "id": "var2",
+              "name": "prompt",
+              "value": "={{ $json['Image Prompt'] }}",
+              "type": "string"
+            },
+            {
+              "id": "var3",
+              "name": "row_number",
+              "value": "={{ $json.row_number }}",
+              "type": "number"
+            },
+            {
+              "id": "var4",
+              "name": "post_date",
+              "value": "={{ String($json['Date of Posting'] ?? '').trim() }}",
+              "type": "string"
+            },
+            {
+              "id": "var5",
+              "name": "post_time",
+              "value": "={{ String($json['TIME OF POSTING '] ?? $json['TIME OF POSTING'] ?? '').trim() }}",
+              "type": "string"
+            },
+            {
+              "id": "var6",
+              "name": "caption",
+              "value": "={{ $json['Caption'] ?? '' }}",
+              "type": "string"
+            },
+            {
+              "id": "var7",
+              "name": "hashtags",
+              "value": "={{ $json['Hashtags'] ?? '' }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "097a25fc-0334-4bf5-8d20-8ddca5863a3b",
+      "name": "Set - Build Sub-Workflow Input1",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        6208,
+        -1680
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1ZADXBEniFbFnqJ9M6neMV1hXgqdESPtNZIguoxsvgtI",
+          "mode": "list",
+          "cachedResultName": "PRO SM ",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1ZADXBEniFbFnqJ9M6neMV1hXgqdESPtNZIguoxsvgtI/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 618622851,
+          "mode": "list",
+          "cachedResultName": "ContentPlan",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1ZADXBEniFbFnqJ9M6neMV1hXgqdESPtNZIguoxsvgtI/edit#gid=618622851"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Processing": "={{ $('Sheets - Get Next New Row1').item.json.Processing }}"
+          },
+          "matchingColumns": [
+            "Processing"
+          ],
+          "schema": [
+            {
+              "id": "Sr No.",
+              "displayName": "Sr No.",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Date of Posting",
+              "displayName": "Date of Posting",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "TIME OF POSTING ",
+              "displayName": "TIME OF POSTING ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Image Prompt",
+              "displayName": "Image Prompt",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Updated Prompt 1",
+              "displayName": "Updated Prompt 1",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Updated Prompt 2",
+              "displayName": "Updated Prompt 2",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Updated Prompt 3",
+              "displayName": "Updated Prompt 3",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Processing",
+              "displayName": "Processing",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Caption",
+              "displayName": "Caption",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Hashtags",
+              "displayName": "Hashtags",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Canva_Edit_URL",
+              "displayName": "Canva_Edit_URL",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Approval_Attempts",
+              "displayName": "Approval_Attempts",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Posted_At",
+              "displayName": "Posted_At",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "a25a5e1c-7f3f-4315-9837-555c62744428",
+      "name": "Sheets - Mark In Progress1",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        6624,
+        -1696
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "sHm4uGoJQ8jIEWsU",
+          "name": "Google Sheets account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a1",
+              "name": "day",
+              "value": "={{ $('Set - Build Sub-Workflow Input1').first().json.day }}",
+              "type": "string"
+            },
+            {
+              "id": "a2",
+              "name": "original_prompt",
+              "value": "={{ $('Set - Build Sub-Workflow Input1').first().json.prompt }}",
+              "type": "string"
+            },
+            {
+              "id": "a3",
+              "name": "current_prompt",
+              "value": "={{ $('Set - Build Sub-Workflow Input1').first().json.prompt }}",
+              "type": "string"
+            },
+            {
+              "id": "a4",
+              "name": "row_number",
+              "value": "={{ $('Set - Build Sub-Workflow Input1').first().json.row_number }}",
+              "type": "number"
+            },
+            {
+              "id": "a5",
+              "name": "attempt_count",
+              "value": "=1",
+              "type": "number"
+            },
+            {
+              "id": "a6",
+              "name": "post_date",
+              "value": "={{ $('Set - Build Sub-Workflow Input1').first().json.post_date }}",
+              "type": "string"
+            },
+            {
+              "id": "a7",
+              "name": "post_time",
+              "value": "={{ $('Set - Build Sub-Workflow Input1').first().json.post_time }}",
+              "type": "string"
+            },
+            {
+              "id": "a8",
+              "name": "caption",
+              "value": "={{ $('Set - Build Sub-Workflow Input1').first().json.caption }}",
+              "type": "string"
+            },
+            {
+              "id": "a9",
+              "name": "hashtags",
+              "value": "={{ $('Set - Build Sub-Workflow Input1').first().json.hashtags }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "511991d9-2035-40fb-a826-d0086cd20390",
+      "name": "Set - Initialize Variables1",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        6896,
+        -1680
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "image",
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-image-2",
+          "mode": "list",
+          "cachedResultName": "GPT-IMAGE-2"
+        },
+        "prompt": "={{ $json.original_prompt }}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 2.3,
+      "position": [
+        7184,
+        -1680
+      ],
+      "id": "0423d700-3a47-432d-ae08-d1ba3d48f507",
+      "name": "Generate Image (First)1",
+      "retryOnFail": false,
+      "maxTries": 2,
+      "credentials": {
+        "openAiApi": {
+          "id": "N7tFaMpuNTcFfPWs",
+          "name": "OpenAI account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.canva.com/rest/v1/asset-uploads",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Asset-Upload-Metadata",
+              "value": "={\"name_base64\":\"RGF5X0ltYWdlX1VwbG9hZC5wbmc=\"}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/octet-stream"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "binaryData",
+        "inputDataFieldName": "data",
+        "options": {
+          "timeout": 120000
+        }
+      },
+      "id": "c468385f-61a6-400e-aa8f-d162907f863f",
+      "name": "Canva - Upload Asset1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        5616,
+        -1360
+      ],
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 5000,
+      "credentials": {
+        "oAuth2Api": {
+          "id": "ZcPs9tgbWJMj3q4Z",
+          "name": "Unnamed credential"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "id": "2d4c7bb6-0158-469d-ac40-65ecff6311a2",
+      "name": "Wait - Asset Processing1",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        5920,
+        -1360
+      ],
+      "webhookId": "asset-wait-webhook-1"
+    },
+    {
+      "parameters": {
+        "url": "=https://api.canva.com/rest/v1/asset-uploads/{{ $('Canva - Upload Asset1').last().json.job.id }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "options": {}
+      },
+      "id": "2e7f0709-5510-4aa1-8f49-a9e5c7cfb215",
+      "name": "Canva - Check Asset Status1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        6256,
+        -1360
+      ],
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 3000,
+      "credentials": {
+        "oAuth2Api": {
+          "id": "ZcPs9tgbWJMj3q4Z",
+          "name": "Unnamed credential"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.canva.com/rest/v1/designs",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{JSON.stringify({design_type: {type: 'custom', width: 1080, height: 1080}, asset_id: $json.job.asset.id})}}",
+        "options": {}
+      },
+      "id": "1d0f3e33-38f2-4da0-b88a-7ada8d9fa7c6",
+      "name": "Canva - Create Design1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        6544,
+        -1360
+      ],
+      "credentials": {
+        "oAuth2Api": {
+          "id": "ZcPs9tgbWJMj3q4Z",
+          "name": "Unnamed credential"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "c1",
+              "name": "design_id",
+              "value": "={{ $json.design.id }}",
+              "type": "string"
+            },
+            {
+              "id": "c2",
+              "name": "edit_url",
+              "value": "={{ $json.design.urls.edit_url }}",
+              "type": "string"
+            },
+            {
+              "id": "c3",
+              "name": "day",
+              "value": "={{ $('Set - Initialize Variables1').first().json.day }}",
+              "type": "string"
+            },
+            {
+              "id": "c4",
+              "name": "row_number",
+              "value": "={{ $('Set - Initialize Variables1').first().json.row_number }}",
+              "type": "number"
+            },
+            {
+              "id": "c5",
+              "name": "original_prompt",
+              "value": "={{ $('Set - Initialize Variables1').first().json.original_prompt }}",
+              "type": "string"
+            },
+            {
+              "id": "c6",
+              "name": "current_prompt",
+              "value": "={{ $('Set - Initialize Variables1').first().json.current_prompt }}",
+              "type": "string"
+            },
+            {
+              "id": "c7",
+              "name": "attempt_count",
+              "value": "={{ $('Set - Initialize Variables1').first().json.attempt_count }}",
+              "type": "number"
+            },
+            {
+              "id": "c8",
+              "name": "post_date",
+              "value": "={{ $('Set - Initialize Variables1').first().json.post_date }}",
+              "type": "string"
+            },
+            {
+              "id": "c9",
+              "name": "post_time",
+              "value": "={{ $('Set - Initialize Variables1').first().json.post_time }}",
+              "type": "string"
+            },
+            {
+              "id": "c10",
+              "name": "caption",
+              "value": "={{ $('Set - Initialize Variables1').first().json.caption }}",
+              "type": "string"
+            },
+            {
+              "id": "c11",
+              "name": "hashtags",
+              "value": "={{ $('Set - Initialize Variables1').first().json.hashtags }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "b1a4dc32-887a-4157-8ecd-061a8de7b7a6",
+      "name": "Set - Design Info1",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        6880,
+        -1360
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "sendAndWait",
+        "sendTo": "thedesignprints@gmail.com",
+        "subject": "=Day {{ $json.day }} - Image Ready for Review (Attempt {{ $json.attempt_count }})",
+        "message": "=Hi,\nDay {{ $json.day }}'s AI-generated image is ready for review.\nScheduled to post on: {{ $json.post_date || 'NOT SET' }} at {{ $json.post_time || 'NOT SET' }}\nEdit here: {{ $json.edit_url }}\nIMPORTANT: After editing in Canva, wait for 'All changes saved' to appear, THEN submit the form.\nApprove = Yes will finalize the image\nApprove = No will let you write feedback for changes",
+        "responseType": "customForm",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Approve",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Yes"
+                  },
+                  {
+                    "option": "No"
+                  }
+                ]
+              },
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Feedback",
+              "fieldType": "textarea",
+              "placeholder": "FEEDBACK FOR UPDATION OF IMAGE"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "0cff6307-cd2d-4680-a431-389f6670ec9b",
+      "name": "Gmail - Send & Wait for Approval1",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        7200,
+        -1360
+      ],
+      "webhookId": "gmail-approval-webhook-1",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "ZUK5yroXw1A0CP1n",
+          "name": "Gmail account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": false,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "e058c47d-abc1-4002-ba6c-75f00cd8d3e4",
+              "leftValue": "={{ $json.data.Approve }}",
+              "rightValue": "Yes",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "id": "2faaf077-570f-4ebf-9dd4-ac7d0b6bc69b",
+      "name": "IF - Approved?1",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        5536,
+        -928
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "ap1",
+              "name": "design_id",
+              "value": "={{ $('Set - Regenerated Design Info1').isExecuted ? $('Set - Regenerated Design Info1').last().json.design_id : $('Set - Design Info1').first().json.design_id }}",
+              "type": "string"
+            },
+            {
+              "id": "ap2",
+              "name": "edit_url",
+              "value": "={{ $('Set - Regenerated Design Info1').isExecuted ? $('Set - Regenerated Design Info1').last().json.edit_url : $('Set - Design Info1').first().json.edit_url }}",
+              "type": "string"
+            },
+            {
+              "id": "ap3",
+              "name": "day",
+              "value": "={{ $('Set - Design Info1').first().json.day }}",
+              "type": "string"
+            },
+            {
+              "id": "ap4",
+              "name": "row_number",
+              "value": "={{ $('Set - Design Info1').first().json.row_number }}",
+              "type": "number"
+            },
+            {
+              "id": "ap5",
+              "name": "attempt_count",
+              "value": "={{ $('Set - Regenerated Design Info1').isExecuted ? $('Set - Regenerated Design Info1').last().json.attempt_count : $('Set - Design Info1').first().json.attempt_count }}",
+              "type": "number"
+            },
+            {
+              "id": "ap6",
+              "name": "final_prompt",
+              "value": "={{ $('Set - Regenerated Design Info1').isExecuted ? $('Set - Regenerated Design Info1').last().json.current_prompt : $('Set - Design Info1').first().json.current_prompt }}",
+              "type": "string"
+            },
+            {
+              "id": "ap7",
+              "name": "post_date",
+              "value": "={{ $('Set - Design Info1').first().json.post_date }}",
+              "type": "string"
+            },
+            {
+              "id": "ap8",
+              "name": "post_time",
+              "value": "={{ $('Set - Design Info1').first().json.post_time }}",
+              "type": "string"
+            },
+            {
+              "id": "ap9",
+              "name": "caption",
+              "value": "={{ $('Set - Design Info1').first().json.caption }}",
+              "type": "string"
+            },
+            {
+              "id": "ap10",
+              "name": "hashtags",
+              "value": "={{ $('Set - Design Info1').first().json.hashtags }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "45fe3eae-d545-4e95-bcb1-739726a50788",
+      "name": "Set - Approved Context1",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        5744,
+        -1120
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.canva.com/rest/v1/exports",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ design_id: $json.design_id, format: { type: 'jpg', quality: 90 } }) }}",
+        "options": {}
+      },
+      "id": "f130f3d0-1f39-4336-b9e2-46082e9bf543",
+      "name": "Canva - Create Export Job1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        5968,
+        -1120
+      ],
+      "credentials": {
+        "oAuth2Api": {
+          "id": "ZcPs9tgbWJMj3q4Z",
+          "name": "Unnamed credential"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "amount": 6
+      },
+      "id": "8314da37-0fbe-4dda-99b1-d17e94cb4817",
+      "name": "Wait - Export Processing1",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        6176,
+        -1120
+      ],
+      "webhookId": "export-wait-webhook-1"
+    },
+    {
+      "parameters": {
+        "url": "=https://api.canva.com/rest/v1/exports/{{ $('Canva - Create Export Job1').last().json.job.id }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "options": {}
+      },
+      "id": "bc6e9231-b5df-44b7-aca0-3dade1805cb7",
+      "name": "Canva - Check Export Status1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        6384,
+        -1120
+      ],
+      "credentials": {
+        "oAuth2Api": {
+          "id": "ZcPs9tgbWJMj3q4Z",
+          "name": "Unnamed credential"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.job.urls[0] }}",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file"
+            }
+          }
+        }
+      },
+      "id": "f11301d4-66b3-43e0-98a8-d18a8cdd425c",
+      "name": "Download Exported Image1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        6784,
+        -1136
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1ZADXBEniFbFnqJ9M6neMV1hXgqdESPtNZIguoxsvgtI",
+          "mode": "list",
+          "cachedResultName": "PROLOGICS_SM_SHEET",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1ZADXBEniFbFnqJ9M6neMV1hXgqdESPtNZIguoxsvgtI/edit"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 618622851,
+          "mode": "list",
+          "cachedResultName": "ContentPlan",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1ZADXBEniFbFnqJ9M6neMV1hXgqdESPtNZIguoxsvgtI/edit#gid=618622851"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "row_number": "={{ $('Set - Approved Context1').last().json.row_number }}",
+            "Processing": "Done",
+            "Canva_Edit_URL": "={{ $('Set - Approved Context1').last().json.edit_url }}",
+            "Approval_Attempts": "={{ $('Set - Approved Context1').last().json.attempt_count }}",
+            "Date of Posting": "={{ $('Set - Approved Context1').last().json.post_date }}",
+            "TIME OF POSTING ": "={{ $('Set - Approved Context1').last().json.post_time }}",
+            "Posted_At": "={{ $now.toISO() }}"
+          },
+          "matchingColumns": [
+            "row_number"
+          ],
+          "schema": [
+            {
+              "id": "Sr No.",
+              "displayName": "Sr No.",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Date of Posting",
+              "displayName": "Date of Posting",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "TIME OF POSTING ",
+              "displayName": "TIME OF POSTING ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Image Prompt",
+              "displayName": "Image Prompt",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Updated Prompt 1",
+              "displayName": "Updated Prompt 1",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Updated Prompt 2",
+              "displayName": "Updated Prompt 2",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Updated Prompt 3",
+              "displayName": "Updated Prompt 3",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Processing",
+              "displayName": "Processing",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Caption",
+              "displayName": "Caption",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Hashtags",
+              "displayName": "Hashtags",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Canva_Edit_URL",
+              "displayName": "Canva_Edit_URL",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Approval_Attempts",
+              "displayName": "Approval_Attempts",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Posted_At",
+              "displayName": "Posted_At",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {
+          "locationDefine": {
+            "values": {}
+          }
+        }
+      },
+      "id": "b426e332-6533-4816-ad17-6feb18034246",
+      "name": "Sheets - Mark Approved1",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        7184,
+        -1136
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "EOHTW7K1G8cAsSPN",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "f1",
+              "name": "feedback",
+              "value": "={{ String($json.data.Feedback ?? '').trim() || 'No specific feedback given. Produce a clearly different variation of the same subject.' }}",
+              "type": "string"
+            },
+            {
+              "id": "f2",
+              "name": "current_prompt",
+              "value": "={{ $('Set - Regenerated Design Info1').isExecuted ? $('Set - Regenerated Design Info1').last().json.current_prompt : $('Set - Design Info1').first().json.current_prompt }}",
+              "type": "string"
+            },
+            {
+              "id": "f3",
+              "name": "original_prompt",
+              "value": "={{ $('Set - Design Info1').first().json.original_prompt }}",
+              "type": "string"
+            },
+            {
+              "id": "f4",
+              "name": "day",
+              "value": "={{ $('Set - Design Info1').first().json.day }}",
+              "type": "string"
+            },
+            {
+              "id": "f5",
+              "name": "row_number",
+              "value": "={{ $('Set - Design Info1').first().json.row_number }}",
+              "type": "number"
+            },
+            {
+              "id": "f6",
+              "name": "attempt_count",
+              "value": "={{ ($('Set - Regenerated Design Info1').isExecuted ? $('Set - Regenerated Design Info1').last().json.attempt_count : $('Set - Design Info1').first().json.attempt_count) + 1 }}",
+              "type": "number"
+            },
+            {
+              "id": "f7",
+              "name": "post_date",
+              "value": "={{ $('Set - Design Info1').first().json.post_date }}",
+              "type": "string"
+            },
+            {
+              "id": "f8",
+              "name": "post_time",
+              "value": "={{ $('Set - Design Info1').first().json.post_time }}",
+              "type": "string"
+            },
+            {
+              "id": "f9",
+              "name": "caption",
+              "value": "={{ $('Set - Design Info1').first().json.caption }}",
+              "type": "string"
+            },
+            {
+              "id": "f10",
+              "name": "hashtags",
+              "value": "={{ $('Set - Design Info1').first().json.hashtags }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "1312f446-d078-4c1f-a31e-f04f4b5ffc24",
+      "name": "Set - Feedback Context1",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        5696,
+        -848
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "max-attempt-check",
+              "leftValue": "={{ $json.attempt_count }}",
+              "rightValue": 4,
+              "operator": {
+                "type": "number",
+                "operation": "lte"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "id": "69f15b6d-d278-4dd2-ab65-ddc245641fcb",
+      "name": "IF - Under Max Attempts?1",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        5920,
+        -832
+      ]
+    },
+    {
+      "parameters": {
+        "sendTo": "thedesignprints@gmail.com",
+        "subject": "=Day {{ $json.day }} - Today limit reached (manual review needed)",
+        "message": "=Today limit reached for Day {{ $json.day }}.\nThe image was regenerated the maximum number of times (original + 3 updated prompts) and still wasn't approved, so the workflow stopped here for today.\n\nScheduled post: {{ $json.post_date || 'NOT SET' }} at {{ $json.post_time || 'NOT SET' }}\n\nLast prompt used:\n{{ $json.current_prompt }}\n\nLast feedback:\n{{ $json.feedback }}\n\nTo retry: set this row's Processing column back to 'New' in the sheet and (optionally) fix the Image Prompt manually.",
+        "options": {}
+      },
+      "id": "43784288-ec77-4f9f-85f2-247d6d2be68f",
+      "name": "Gmail - Manual Review Needed1",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        6128,
+        -608
+      ],
+      "webhookId": "manual-review-webhook-1",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "cnWKuGl8B3qR4cb6",
+          "name": "Gmail account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "chat",
+        "model": "gpt-4o-mini",
+        "prompt": {
+          "messages": [
+            {
+              "content": "=You are an expert image prompt engineer.\n\nCURRENT PROMPT (this is exactly what generated the last image):\n{{ $json.current_prompt }}\n\nEDITOR FEEDBACK (changes the editor wants):\n{{ $json.feedback }}\n\nRewrite the CURRENT PROMPT so that it fully incorporates the editor's feedback.\nKeep every detail of the CURRENT PROMPT that the feedback does not contradict.\nOnly change or add what the feedback asks for.\n\nReturn ONLY the new image prompt. No explanation, no quotes, no preamble."
+            }
+          ]
+        },
+        "options": {},
+        "requestOptions": {}
+      },
+      "id": "eeba6a26-57c0-4a95-a935-ff6a6f7172ae",
+      "name": "GPT-4o - Merge Feedback into Prompt1",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [
+        6128,
+        -832
+      ],
+      "retryOnFail": true,
+      "maxTries": 2,
+      "credentials": {
+        "openAiApi": {
+          "id": "N7tFaMpuNTcFfPWs",
+          "name": "OpenAI account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "d1",
+              "name": "merged_prompt",
+              "value": "={{ $json.message.content.trim() }}",
+              "type": "string"
+            },
+            {
+              "id": "d2",
+              "name": "day",
+              "value": "={{ $('Set - Feedback Context1').last().json.day }}",
+              "type": "string"
+            },
+            {
+              "id": "d3",
+              "name": "row_number",
+              "value": "={{ $('Set - Feedback Context1').last().json.row_number }}",
+              "type": "number"
+            },
+            {
+              "id": "d4",
+              "name": "original_prompt",
+              "value": "={{ $('Set - Feedback Context1').last().json.original_prompt }}",
+              "type": "string"
+            },
+            {
+              "id": "d5",
+              "name": "attempt_count",
+              "value": "={{ $('Set - Feedback Context1').last().json.attempt_count }}",
+              "type": "number"
+            },
+            {
+              "id": "d6",
+              "name": "post_date",
+              "value": "={{ $('Set - Feedback Context1').last().json.post_date }}",
+              "type": "string"
+            },
+            {
+              "id": "d7",
+              "name": "post_time",
+              "value": "={{ $('Set - Feedback Context1').last().json.post_time }}",
+              "type": "string"
+            },
+            {
+              "id": "d8",
+              "name": "caption",
+              "value": "={{ $('Set - Feedback Context1').last().json.caption }}",
+              "type": "string"
+            },
+            {
+              "id": "d9",
+              "name": "hashtags",
+              "value": "={{ $('Set - Feedback Context1').last().json.hashtags }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "11567404-7c49-429c-9b85-086992a29a32",
+      "name": "Set - Merged Prompt1",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        6336,
+        -832
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "image",
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-image-2",
+          "mode": "list",
+          "cachedResultName": "GPT-IMAGE-2"
+        },
+        "prompt": "={{ $('Set - Merged Prompt1').last().json.merged_prompt }}",
+        "options": {}
+      },
+      "id": "5b945f60-f5b0-4c91-a984-5d5fb948600e",
+      "name": "Generate Image (Regen)1",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 2.3,
+      "position": [
+        6544,
+        -832
+      ],
+      "retryOnFail": false,
+      "maxTries": 2,
+      "credentials": {
+        "openAiApi": {
+          "id": "N7tFaMpuNTcFfPWs",
+          "name": "OpenAI account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.canva.com/rest/v1/asset-uploads",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/octet-stream"
+            },
+            {
+              "name": "Asset-Upload-Metadata",
+              "value": "={\"name_base64\":\"UmVnZW5fSW1hZ2UucG5n\"}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "binaryData",
+        "inputDataFieldName": "data",
+        "options": {
+          "timeout": 120000
+        }
+      },
+      "id": "c2c59b5f-935f-4a7c-9a3e-7050999cdb00",
+      "name": "Canva - Upload Regenerated Asset1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        6752,
+        -832
+      ],
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 5000,
+      "credentials": {
+        "oAuth2Api": {
+          "id": "ZcPs9tgbWJMj3q4Z",
+          "name": "Unnamed credential"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "id": "688c54f8-aeda-412c-9584-3959c1a85553",
+      "name": "Wait - Asset Processing (Regen)1",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        6960,
+        -832
+      ],
+      "webhookId": "regen-wait-webhook-1"
+    },
+    {
+      "parameters": {
+        "url": "=https://api.canva.com/rest/v1/asset-uploads/{{ $('Canva - Upload Regenerated Asset1').last().json.job.id }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "options": {}
+      },
+      "id": "611a75fa-acea-4285-ac5d-5a6183506195",
+      "name": "Canva - Check Asset Status (Regen)1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        7168,
+        -832
+      ],
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 3000,
+      "credentials": {
+        "oAuth2Api": {
+          "id": "ZcPs9tgbWJMj3q4Z",
+          "name": "Unnamed credential"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.canva.com/rest/v1/designs",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ design_type: { type: 'custom', width: 1080, height: 1080 }, asset_id: $json.job.asset.id }) }}",
+        "options": {}
+      },
+      "id": "c7dad002-da1a-44dc-9b60-b20811ea0712",
+      "name": "Canva - Create Design (Regen)1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        7376,
+        -832
+      ],
+      "credentials": {
+        "oAuth2Api": {
+          "id": "ZcPs9tgbWJMj3q4Z",
+          "name": "Unnamed credential"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "r1",
+              "name": "day",
+              "value": "={{ $('Set - Merged Prompt1').last().json.day }}",
+              "type": "string"
+            },
+            {
+              "id": "r2",
+              "name": "row_number",
+              "value": "={{ $('Set - Merged Prompt1').last().json.row_number }}",
+              "type": "number"
+            },
+            {
+              "id": "r3",
+              "name": "original_prompt",
+              "value": "={{ $('Set - Merged Prompt1').last().json.original_prompt }}",
+              "type": "string"
+            },
+            {
+              "id": "r4",
+              "name": "current_prompt",
+              "value": "={{ $('Set - Merged Prompt1').last().json.merged_prompt }}",
+              "type": "string"
+            },
+            {
+              "id": "r5",
+              "name": "attempt_count",
+              "value": "={{ $('Set - Merged Prompt1').last().json.attempt_count }}",
+              "type": "number"
+            },
+            {
+              "id": "r6",
+              "name": "design_id",
+              "value": "={{ $json.design.id }}",
+              "type": "string"
+            },
+            {
+              "id": "r7",
+              "name": "edit_url",
+              "value": "={{ $json.design.urls.edit_url }}",
+              "type": "string"
+            },
+            {
+              "id": "r8",
+              "name": "post_date",
+              "value": "={{ $('Set - Merged Prompt1').last().json.post_date }}",
+              "type": "string"
+            },
+            {
+              "id": "r9",
+              "name": "post_time",
+              "value": "={{ $('Set - Merged Prompt1').last().json.post_time }}",
+              "type": "string"
+            },
+            {
+              "id": "r10",
+              "name": "caption",
+              "value": "={{ $('Set - Merged Prompt1').last().json.caption }}",
+              "type": "string"
+            },
+            {
+              "id": "r11",
+              "name": "hashtags",
+              "value": "={{ $('Set - Merged Prompt1').last().json.hashtags }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "ce6c2479-d5ba-4b18-a515-975c64fa41b0",
+      "name": "Set - Regenerated Design Info1",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        7584,
+        -832
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "sendAndWait",
+        "sendTo": "thedesignprints@gmail.com",
+        "subject": "=Day {{ $json.day }} - REVISED Image (Attempt {{ $json.attempt_count }})",
+        "message": "=Hi,\nHere's the REVISED version of Day {{ $json.day }}'s image based on your feedback.\nScheduled to post on: {{ $json.post_date || 'NOT SET' }} at {{ $json.post_time || 'NOT SET' }}\nEdit here: {{ $json.edit_url }}\nApprove = Yes finalizes it\nApprove = No lets you write further changes\nAttempt #{{ $json.attempt_count }}\nPrompt used:\n{{ $json.current_prompt }}",
+        "responseType": "customForm",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Approve",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Yes"
+                  },
+                  {
+                    "option": "No"
+                  }
+                ]
+              },
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Feedback",
+              "fieldType": "textarea",
+              "placeholder": "FEEDBACK FOR UPDATION OF IMAGE"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "b5dc8cbc-9330-42d5-9f77-133d0f2b56ec",
+      "name": "Gmail - Send & Wait (Regenerated)1",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        7792,
+        -832
+      ],
+      "webhookId": "regen-gmail-webhook-1",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "303iXWzedwgWrRJx",
+          "name": "Gmail account 4"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "db65b1fa-129e-4dd0-ac26-fcdaab3c4d4c",
+              "leftValue": "={{ $json.data.Approve }}",
+              "rightValue": "Yes",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "id": "b3820445-4ea5-4c1e-a8f7-27226103a50d",
+      "name": "IF - Approved (Regenerated)?1",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        8000,
+        -832
+      ]
+    },
+    {
+      "parameters": {
+        "name": "=Day{{ $('Set - Approved Context1').last().json.day }}.jpg",
+        "driveId": {
+          "__rl": true,
+          "value": "My Drive",
+          "mode": "list",
+          "cachedResultName": "My Drive",
+          "cachedResultUrl": "https://drive.google.com/drive/my-drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "1vYHAiv8fTZa4ZZSH2k07qye8khjcUNc7",
+          "mode": "list",
+          "cachedResultName": "DAILY POSTING PROLOGICS SM",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/1vYHAiv8fTZa4ZZSH2k07qye8khjcUNc7"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        6960,
+        -1136
+      ],
+      "id": "15a9a068-2925-466d-aa5f-bfd39824441c",
+      "name": "Upload to Drive1",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "JSiUwKkBeNmmg8Ul",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "triggerOn": "specificFolder",
+        "folderToWatch": {
+          "value": "YOUR_FINAL_UPLOADS_FOLDER_ID",
+          "mode": "id"
+        },
+        "event": "fileCreated",
+        "options": {}
+      },
+      "id": "b20afeac-ed89-410c-8ec1-21f87572366c",
+      "name": "Drive Trigger - Final Image Uploaded",
+      "type": "n8n-nodes-base.googleDriveTrigger",
+      "typeVersion": 1,
+      "position": [
+        5504,
+        416
+      ],
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "JSiUwKkBeNmmg8Ul",
+          "name": "Google Drive account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a1",
+              "name": "day",
+              "value": "={{$json.name.match(/Day(\\d+)/i)[1]}}",
+              "type": "string"
+            },
+            {
+              "id": "a2",
+              "name": "file_id",
+              "value": "={{$json.id}}",
+              "type": "string"
+            },
+            {
+              "id": "a3",
+              "name": "file_name",
+              "value": "={{$json.name}}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "059ace14-32ec-41e8-9b2b-47cc78c292cd",
+      "name": "Set - Extract Day from Filename",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        6208,
+        416
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "value": "={{$json.file_id}}",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "id": "a5f00f10-2220-44dc-9628-18baf352a0cd",
+      "name": "Drive - Download Image",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        6640,
+        304
+      ],
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "JSiUwKkBeNmmg8Ul",
+          "name": "Google Drive account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "b1",
+              "name": "day",
+              "value": "={{$('extract-day').item.json.day}}",
+              "type": "string"
+            },
+            {
+              "id": "b2",
+              "name": "row_number",
+              "value": "={{$('sheets-get-content').item.json.row_number}}",
+              "type": "number"
+            },
+            {
+              "id": "b3",
+              "name": "caption",
+              "value": "={{$('sheets-get-content').item.json.Caption}}\n\n{{$('sheets-get-content').item.json.Hashtags}}",
+              "type": "string"
+            },
+            {
+              "id": "b4",
+              "name": "public_url",
+              "value": "=https://drive.google.com/uc?export=view&id={{$('extract-day').item.json.file_id}}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "283b8672-7f77-4210-9a9e-4a131e533604",
+      "name": "Set - Merge Post Data",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        6992,
+        416
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "value": "YOUR_GOOGLE_SHEET_ID",
+          "mode": "id"
+        },
+        "sheetName": {
+          "value": "ContentPlan",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "row_number": "={{$('set-post-data').item.json.row_number}}",
+            "Status": "Posted",
+            "Posted_At": "={{$now.toISO()}}"
+          },
+          "matchingColumns": [
+            "row_number"
+          ]
+        },
+        "options": {}
+      },
+      "id": "d7ec5c82-21a9-4ffc-8c54-a694e65c0194",
+      "name": "Sheets - Mark Row Posted",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        7952,
+        416
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "EOHTW7K1G8cAsSPN",
+          "name": "Google Sheets account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "value": "YOUR_GOOGLE_SHEET_ID",
+          "mode": "id"
+        },
+        "sheetName": {
+          "value": "ContentPlan",
+          "mode": "name"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "Day",
+              "lookupValue": "={{$('extract-day').item.json.day}}"
+            }
+          ]
+        },
+        "options": {
+          "returnFirstMatch": true
+        }
+      },
+      "id": "cfe78c44-bc9a-4aa0-8271-a0126d685550",
+      "name": "Sheets - Get Caption & Hashtags1",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        6640,
+        512
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "EOHTW7K1G8cAsSPN",
+          "name": "Google Sheets account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "text": "={{$json.caption}}",
+        "shareMediaCategory": "IMAGE",
+        "additionalFields": {}
+      },
+      "id": "9e86f26e-6e83-4338-81b4-acbcaf2440bb",
+      "name": "LinkedIn - Publish Post1",
+      "type": "n8n-nodes-base.linkedIn",
+      "typeVersion": 1,
+      "position": [
+        7360,
+        208
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://graph.facebook.com/v19.0/YOUR_FACEBOOK_PAGE_ID/photos",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "facebookGraphApi",
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "caption",
+              "value": "={{$json.caption}}"
+            },
+            {
+              "parameterType": "formBinaryData",
+              "name": "source",
+              "inputDataFieldName": "data"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "86346e67-32ce-4ab2-958d-5b3e2e1d9e6a",
+      "name": "Facebook - Publish Photo1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        7360,
+        416
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://graph.instagram.com/v19.0/YOUR_INSTAGRAM_BUSINESS_USER_ID/media",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "facebookGraphApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{JSON.stringify({image_url: $json.public_url, caption: $json.caption})}}",
+        "options": {}
+      },
+      "id": "e0894fa3-2daf-4053-b8d4-ca21f0c085ff",
+      "name": "Instagram - Create Media Container1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        7360,
+        656
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://graph.instagram.com/v19.0/YOUR_INSTAGRAM_BUSINESS_USER_ID/media_publish",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "facebookGraphApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{JSON.stringify({creation_id: $json.id})}}",
+        "options": {}
+      },
+      "id": "9b7c07d0-3f70-4cc1-8f63-e56fb9e1cb42",
+      "name": "Instagram - Publish Container1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        7664,
+        656
+      ],
+      "disabled": true
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Limit - Only 1 Row Per Run": {
+      "main": [
+        [
+          {
+            "node": "Set - Build Sub-Workflow Input1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF - Row Has Prompt?": {
+      "main": [
+        [
+          {
+            "node": "Sheets - Mark In Progress1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch - Which Updated Prompt1": {
+      "main": [
+        [
+          {
+            "node": "Sheets - Save Updated Prompt ",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Sheets - Save Updated Prompt 4",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Sheets - Save Updated Prompt 5",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Generate Image (Regen)1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sheets - Save Updated Prompt ": {
+      "main": [
+        [
+          {
+            "node": "Generate Image (Regen)1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sheets - Save Updated Prompt 4": {
+      "main": [
+        [
+          {
+            "node": "Generate Image (Regen)1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sheets - Save Updated Prompt 5": {
+      "main": [
+        [
+          {
+            "node": "Generate Image (Regen)1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF - Export Done1": {
+      "main": [
+        [
+          {
+            "node": "Download Exported Image1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Wait - Export Processing1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule - Daily 8AM1": {
+      "main": [
+        [
+          {
+            "node": "Sheets - Get Next New Row1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sheets - Get Next New Row1": {
+      "main": [
+        [
+          {
+            "node": "Limit - Only 1 Row Per Run",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set - Build Sub-Workflow Input1": {
+      "main": [
+        [
+          {
+            "node": "IF - Row Has Prompt?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sheets - Mark In Progress1": {
+      "main": [
+        [
+          {
+            "node": "Set - Initialize Variables1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set - Initialize Variables1": {
+      "main": [
+        [
+          {
+            "node": "Generate Image (First)1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Image (First)1": {
+      "main": [
+        [
+          {
+            "node": "Canva - Upload Asset1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Canva - Upload Asset1": {
+      "main": [
+        [
+          {
+            "node": "Wait - Asset Processing1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait - Asset Processing1": {
+      "main": [
+        [
+          {
+            "node": "Canva - Check Asset Status1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Canva - Check Asset Status1": {
+      "main": [
+        [
+          {
+            "node": "Canva - Create Design1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Canva - Create Design1": {
+      "main": [
+        [
+          {
+            "node": "Set - Design Info1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set - Design Info1": {
+      "main": [
+        [
+          {
+            "node": "Gmail - Send & Wait for Approval1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gmail - Send & Wait for Approval1": {
+      "main": [
+        [
+          {
+            "node": "IF - Approved?1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF - Approved?1": {
+      "main": [
+        [
+          {
+            "node": "Set - Approved Context1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Set - Feedback Context1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set - Approved Context1": {
+      "main": [
+        [
+          {
+            "node": "Canva - Create Export Job1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Canva - Create Export Job1": {
+      "main": [
+        [
+          {
+            "node": "Wait - Export Processing1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait - Export Processing1": {
+      "main": [
+        [
+          {
+            "node": "Canva - Check Export Status1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Canva - Check Export Status1": {
+      "main": [
+        [
+          {
+            "node": "IF - Export Done1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download Exported Image1": {
+      "main": [
+        [
+          {
+            "node": "Upload to Drive1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set - Feedback Context1": {
+      "main": [
+        [
+          {
+            "node": "IF - Under Max Attempts?1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF - Under Max Attempts?1": {
+      "main": [
+        [
+          {
+            "node": "GPT-4o - Merge Feedback into Prompt1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Gmail - Manual Review Needed1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GPT-4o - Merge Feedback into Prompt1": {
+      "main": [
+        [
+          {
+            "node": "Set - Merged Prompt1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set - Merged Prompt1": {
+      "main": [
+        [
+          {
+            "node": "Switch - Which Updated Prompt1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Image (Regen)1": {
+      "main": [
+        [
+          {
+            "node": "Canva - Upload Regenerated Asset1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Canva - Upload Regenerated Asset1": {
+      "main": [
+        [
+          {
+            "node": "Wait - Asset Processing (Regen)1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait - Asset Processing (Regen)1": {
+      "main": [
+        [
+          {
+            "node": "Canva - Check Asset Status (Regen)1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Canva - Check Asset Status (Regen)1": {
+      "main": [
+        [
+          {
+            "node": "Canva - Create Design (Regen)1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Canva - Create Design (Regen)1": {
+      "main": [
+        [
+          {
+            "node": "Set - Regenerated Design Info1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set - Regenerated Design Info1": {
+      "main": [
+        [
+          {
+            "node": "Gmail - Send & Wait (Regenerated)1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gmail - Send & Wait (Regenerated)1": {
+      "main": [
+        [
+          {
+            "node": "IF - Approved (Regenerated)?1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF - Approved (Regenerated)?1": {
+      "main": [
+        [
+          {
+            "node": "Set - Approved Context1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Set - Feedback Context1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload to Drive1": {
+      "main": [
+        [
+          {
+            "node": "Sheets - Mark Approved1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Drive Trigger - Final Image Uploaded": {
+      "main": [
+        [
+          {
+            "node": "Set - Extract Day from Filename",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set - Extract Day from Filename": {
+      "main": [
+        [
+          {
+            "node": "Drive - Download Image",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Sheets - Get Caption & Hashtags1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Drive - Download Image": {
+      "main": [
+        [
+          {
+            "node": "Set - Merge Post Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set - Merge Post Data": {
+      "main": [
+        [
+          {
+            "node": "LinkedIn - Publish Post1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Facebook - Publish Photo1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Instagram - Create Media Container1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sheets - Get Caption & Hashtags1": {
+      "main": [
+        [
+          {
+            "node": "Set - Merge Post Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "LinkedIn - Publish Post1": {
+      "main": [
+        [
+          {
+            "node": "Sheets - Mark Row Posted",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Facebook - Publish Photo1": {
+      "main": [
+        [
+          {
+            "node": "Sheets - Mark Row Posted",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Instagram - Create Media Container1": {
+      "main": [
+        [
+          {
+            "node": "Instagram - Publish Container1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Instagram - Publish Container1": {
+      "main": [
+        [
+          {
+            "node": "Sheets - Mark Row Posted",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "95deeca1-898c-4187-9ea4-01c0049f211b",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "7a82bb37f51954bdc36c65a79f417921d563aa483c98161207c01d2ba26d1306"
+  },
+  "nodeGroups": [],
+  "id": "SQu8hAJh5e5MSWnN",
+  "tags": []
+}
